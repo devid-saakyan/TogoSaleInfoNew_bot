@@ -34,7 +34,7 @@ async def start(message: types.Message):
     sleep(2)
     await message.answer('Ах, да... Забыл представиться, я - бот Пётр, к вашим услугам')
     sleep(2)
-    await message.answer("Чтобы мы продолжили дальнешее общение, вам необходимо заполнить форму по ссылке ниже\nПрошу, после завершения, нажать на кнопку 'Завершено'")
+    await message.answer("Чтобы мы продолжили дальнейшее общение, вам необходимо заполнить форму по ссылке ниже\nПрошу, после завершения, нажать на кнопку 'Завершено'")
     sleep(2)
     await message.answer('https://docs.google.com/forms/d/e/1FAIpQLSeuziM3rTD0Cwj2o_YkD5Vq67AbwE65Z80ZvV2evciSvCBsrw/viewform', reply_markup=keyboard1())
 
@@ -46,7 +46,7 @@ async def menu(message:types.Message):
 @dp.callback_query_handler(lambda c: c.data == 'finish')
 async def process_after_finish(callback_query: types.CallbackQuery):
     await bot.delete_message(callback_query.from_user.id, callback_query.message.message_id)
-    await bot.send_message(callback_query.from_user.id, text = 'Отлично! Теперь введите пароль, чтобы вы могли пользоваться мной!')
+    await bot.send_message(callback_query.from_user.id, text = 'Отлично! Теперь введите пароль, чтобы я смог помочь вам!')
 
 @dp.message_handler(content_types=['text'])
 async def message(message:types.Message):
