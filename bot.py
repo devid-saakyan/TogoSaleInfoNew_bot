@@ -35,7 +35,7 @@ async def start(message: types.Message):
     await message.answer('Ах, да... Забыл представиться, я - бот Пётр, к вашим услугам')
     sleep(2)
     await message.answer("Чтобы мы продолжили дальнешее общение, вам необходимо заполнить форму по ссылке ниже\nПрошу, после завершения, нажать на кнопку 'Завершено'")
-
+    sleep(2)
     await message.answer('https://docs.google.com/forms/d/e/1FAIpQLSeuziM3rTD0Cwj2o_YkD5Vq67AbwE65Z80ZvV2evciSvCBsrw/viewform', reply_markup=keyboard1())
 
 @dp.message_handler(commands=['menu'])
