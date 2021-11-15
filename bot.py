@@ -32,7 +32,7 @@ class States(StatesGroup):
 async def start(message: types.Message):
     await message.answer('Привет👋\nЯ ваш виртуальный помощник по освоению материала в нашей компании')
     sleep(2)
-    await message.answer('Ах, да... Забыл представиться, я - бот Пётр, к вашим услугам')
+    await message.answer('Ах, да... Забыл представиться, я - бот Лера, к вашим услугам')
     sleep(2)
     await message.answer("Чтобы мы продолжили дальнейшее общение, вам необходимо заполнить форму по ссылке ниже\nПрошу, после завершения, нажать на кнопку 'Завершено'")
     sleep(2)
@@ -63,7 +63,7 @@ async def state1(message: types.Message):
     await States.state2.set()
 
 @dp.message_handler(state = States.state2)
-async def state2(message: types.Message):
+async def state2(message: types.Message, state: FSMContext):
     if message.text == 'Склад':
         await message.answer('Вы выбрали пункт Склад, выберите направление из меню', reply_markup=keyboard_sklad())
         await States.sklad.set()
@@ -74,8 +74,10 @@ async def state2(message: types.Message):
         await message.answer('Вы выбрали пункт Администарция, выберите направление из меню', reply_markup=keyboard_admin())
         await States.admin.set()
     elif message.text == 'Важная информация':
-        await message.answer('Вы выбрали пункт Важная информация, выберите направление из меню', reply_markup=keyboard_vajn_infa())
-        await States.vajn_infa.set()
+        #await message.answer('Вы выбрали пункт Важная информация, выберите направление из меню', reply_markup=keyboard_vajn_infa())
+        await message.answer('https://docs.google.com/document/d/1AZsS7gbPooiElsF_kThMiNM27EcTvp50to4YcOKXWuY/edit')
+        #await States.vajn_infa.set()
+        await state.reset_state()
     elif message.text == 'Отдел продаж':
         await message.answer('Вы выбрали пункт Отдел продаж, выберите направление из меню', reply_markup=keyboard_op())
         await States.otdel_prodaj.set()
@@ -86,7 +88,8 @@ async def state_sklad(message: types.Message, state: FSMContext):
         await message.answer('Выберите пункт из меню:', reply_markup=keyboard3())
         await States.state2.set()
         return True
-    await message.answer('Пока пусто')
+    if message.text == 'Должности':
+        await message.answer('https://docs.google.com/document/d/12PPNiRoFa0R6I5o91Felo9esoT522fvm8BIBgGqr6ek/edit')
     await state.reset_state()
 
 @dp.message_handler(state = States.ofis_s)
@@ -95,7 +98,8 @@ async def state_sklad(message: types.Message, state: FSMContext):
         await message.answer('Выберите пункт из меню:', reply_markup=keyboard3())
         await States.state2.set()
         return True
-    await message.answer('Пока пусто')
+    if message.text == 'Должности':
+        await message.answer('https://docs.google.com/document/d/12PPNiRoFa0R6I5o91Felo9esoT522fvm8BIBgGqr6e')
     await state.reset_state()
 
 @dp.message_handler(state = States.admin)

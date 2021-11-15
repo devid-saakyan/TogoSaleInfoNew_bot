@@ -36,8 +36,9 @@ def keyboard_sklad():
     button3 = types.KeyboardButton('Регламент работы сотрудников склада')
     button4 = types.KeyboardButton('Начальник склада')
     button5 = types.KeyboardButton('Закупка')
+    button6 = types.KeyboardButton('Должности')
     button_back = types.KeyboardButton('⬅ Назад')
-    sp = [button1, button2, button3, button4, button5]
+    sp = [button1, button2, button3, button4, button5, button6]
     for i in sp:
         markup.row(i)
     markup.row(button_back)
@@ -52,7 +53,8 @@ def keyboard_ofis():
     button5 = types.KeyboardButton('Управление директором')
     button6 = types.KeyboardButton('Управление ценным имуществом')
     button7 = types.KeyboardButton('Построение компании')
-    sp = [button1, button2, button3, button4, button5, button6, button7]
+    button8 = types.KeyboardButton('Должности')
+    sp = [button1, button2, button3, button4, button5, button6, button7, button8]
     button_back = types.KeyboardButton('⬅ Назад')
     for i in sp:
         markup.row(i)
