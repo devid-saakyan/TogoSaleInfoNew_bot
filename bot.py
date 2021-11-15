@@ -20,6 +20,7 @@ async def on_startup(dp):
 
 
 class States(StatesGroup):
+    state0 = State()
     state1 = State()
     state2 = State()
     sklad = State()
@@ -47,8 +48,9 @@ async def menu(message:types.Message):
 async def process_after_finish(callback_query: types.CallbackQuery):
     await bot.delete_message(callback_query.from_user.id, callback_query.message.message_id)
     await bot.send_message(callback_query.from_user.id, text = 'Отлично! Теперь введите пароль, чтобы я смог помочь вам!')
+    await States.state0.set()
 
-@dp.message_handler(content_types=['text'])
+@dp.message_handler(state = States.state0)
 async def message(message:types.Message):
     if message.text == '11111':
         await message.answer('Открываю доступ...')
@@ -81,6 +83,12 @@ async def state2(message: types.Message, state: FSMContext):
     elif message.text == 'Отдел продаж':
         await message.answer('Вы выбрали пункт Отдел продаж, выберите направление из меню', reply_markup=keyboard_op())
         await States.otdel_prodaj.set()
+    elif message.text == '/start':
+        await message.answer('Перезапускаюсь...')
+        await message.answer('Наберите пароль ещё раз, пожалуйста')
+        await States.state0.set()
+    else:
+        await message.answer('Нет такого пункта в меню, попробуйте выбрать ещё раз, или перезапустите бот командой /start', keyboard3())
 
 @dp.message_handler(state = States.sklad)
 async def state_sklad(message: types.Message, state: FSMContext):
@@ -99,7 +107,7 @@ async def state_sklad(message: types.Message, state: FSMContext):
         await States.state2.set()
         return True
     if message.text == 'Должности':
-        await message.answer('https://docs.google.com/document/d/12PPNiRoFa0R6I5o91Felo9esoT522fvm8BIBgGqr6e')
+        await message.answer('https://docs.google.com/document/d/12PPNiRoFa0R6I5o91Felo9esoT522fvm8BIBgGqr6ek/edit')
     await state.reset_state()
 
 @dp.message_handler(state = States.admin)
